@@ -14,14 +14,14 @@ st.markdown("""
         color: #666;
         margin-bottom: -20px;
     }
-    /* 入力欄のラベルを大きく、太く、緑色にする */
+    /* 入力欄のラベルスタイル */
     .stNumberInput label {
         font-size: 28px !important;
         color: #22c55e !important;
         font-weight: 800 !important;
         line-height: 1.5;
     }
-    /* 入力枠そのものを大きく、枠線を緑色にする */
+    /* 入力枠のスタイル */
     div[data-baseweb="input"] {
         height: 60px !important;
         font-size: 28px !important;
@@ -52,7 +52,8 @@ w_val = 0.0
 dbuv_val = 0.0
 
 if mode == "W (ワット) を入力":
-    w_in = st.number_input("電力 (W)", value=1.0, format="%.4f", step=0.1)
+    # 入力は小数点4桁まで受け入れ
+    w_in = st.number_input("電力 (W)", value=1.000, format="%.4f", step=0.001)
     w_val = w_in
     # W -> V -> dBμV (50Ω)
     v_val = math.sqrt(w_in * 50)
@@ -64,7 +65,6 @@ else:
     dbuv_in = st.number_input("電圧レベル (dBμV)", value=120.0, format="%.2f", step=1.0)
     dbuv_val = dbuv_in
     # dBμV -> V -> W (50Ω)
-    # V = 10^((dBμV-120)/20)
     v_val = 10 ** ((dbuv_in - 120) / 20)
     w_val = (v_val ** 2) / 50
 
@@ -81,15 +81,17 @@ st.subheader("📊 変換結果 (50Ω系)")
 
 col1, col2 = st.columns(2)
 with col1:
-    st.metric("電力 (W)", f"{w_val:,.4f} W")
-    st.metric("電圧レベル (dBμV)", f"{dbuv_val:.2f} dBμV")
+    # 電力をW単位で小数点以下3桁表示
+    st.metric("電力 (W)", f"{w_val:.3f} W")
+    # 電圧をV単位で小数点以下3桁表示
+    st.metric("電圧 (V)", f"{v_val:.3f} V")
 
 with col2:
-    st.metric("電圧 (V)", f"{v_val:,.4f} V")
+    st.metric("電圧レベル (dBμV)", f"{dbuv_val:.2f} dBμV")
     st.metric("電力 (dBm)", f"{dbm_val:.2f} dBm")
 
-st.write(f"電力 (mW): **{mw_val:,.2f} mW**")
+st.write(f"（参考）電力 (mW): **{mw_val:,.2f} mW**")
 st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("---")
-st.caption("💡 50Ω系において、120dBμV = 1V = 0.02W (13.01dBm) です。")
+st.caption("💡 表示設定: 電力(W)および電圧(V)は小数点以下3桁で表示しています。")
