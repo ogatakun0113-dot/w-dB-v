@@ -88,8 +88,8 @@ col1, col2 = st.columns(2)
 with col1:
     # 電力をW単位で小数点以下3桁表示
     st.metric("電力 (W)", f"{w_val:.3f} W")
-    # 電圧をV単位で小数点以下3桁表示
-    st.metric("電圧 (V)", f"{v_val:.3f} V")
+    # 電圧をV単位で小数点以下4桁表示
+    st.metric("電圧 (V)", f"{v_val:.4f} V")
 
 with col2:
     st.metric("電圧レベル (dBμV)", f"{dbuv_val:.2f} dBμV")
