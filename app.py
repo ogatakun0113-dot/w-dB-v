@@ -2,7 +2,7 @@ import streamlit as st
 import math
 
 # --- ページ設定 ---
-st.set_page_config(page_title="W ⇄ dBμV 変換アプリ", layout="centered")
+st.set_page_config(page_title="W ⇄ dBμV 変換アシスト", layout="centered")
 
 # --- 見た目の設定（CSS） ---
 st.markdown("""
@@ -42,7 +42,7 @@ st.markdown("""
 # 右上にクレジットを表示
 st.markdown('<p class="credit">開発/制作：緒方</p>', unsafe_allow_html=True)
 
-st.title('📡 W ⇄ dBμV 相互変換アプリ')
+st.title('📡 W ⇄ dBμV 変換アシスト')
 st.markdown("---")
 
 # --- インピーダンス設定セクション ---
