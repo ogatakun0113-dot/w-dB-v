@@ -105,3 +105,25 @@ if impedance == 50:
 else:
     st.caption("💡 75Ω系: 120dBμV = 1V ≒ 0.013W (11.25dBm) です。")
 st.caption("表示設定: 電力(W)および電圧(V)は小数点以下3桁で表示しています。")
+
+# --- 画面下部中央に「戻る」ボタンを配置 ---
+st.markdown("---")  # 区切り線
+col1, col2, col3 = st.columns([1, 1, 1])
+
+with col2:  # 中央の列を使用
+    # 水色のアイコン（🏠）と「戻る」を表示するボタン
+    if st.link_button("🏠\n\n戻る", "https://menue3-pkwzfkwnoxnnuljkqg7mdt.streamlit.app/", use_container_width=True):
+        pass
+
+# ボタンの色（水色）を調整するカスタム設定
+st.markdown("""
+    <style>
+    div.stLinkButton > a {
+        background-color: #00BFFF !important; /* 水色（DeepSkyBlue） */
+        color: white !important;
+        border-radius: 10px;
+        text-align: center;
+        border: none;
+    }
+    </style>
+    """, unsafe_allow_html=True)
